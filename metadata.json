@@ -1,0 +1,6 @@
+{
+  "name": "GupTech",
+  "description": "An interactive digital services platform comprising five custom-engineered capability pillars with active explorers, stats dashboard, dynamic service estimation tools, and deep visual themes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

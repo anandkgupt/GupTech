@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+@theme {
+  --font-sans: "Epilogue", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bebas Neue", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Premium Deep Dark Blue Cosmic Theme */
+  --color-bg-dark: #030714;
+  --color-bg-card: #0a1128;
+  --color-bg-card-hover: #121c42;
+  --color-border-subtle: rgba(56, 189, 248, 0.06);
+  --color-border-visible: rgba(244, 63, 94, 0.12);
+
+  /* Refined Elegant Pillars Spectrum mapped to: dark blue, sky, white, red */
+  --color-pillar-cyan: #fb7185;
+  --color-pillar-orange: #38bdf8;
+  --color-pillar-violet: #ffffff;
+  --color-pillar-sky: #0ea5e9;
+  --color-pillar-green: #ef4444;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-dark);
+    color: #e4e4e7;
+    overflow-x: hidden;
+    font-family: var(--font-sans);
+  }
+
+  /* Grid pattern overlay - ambient neon on deep canvas */
+  .grid-pattern-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom subtle scrollbar designed for dark backgrounds */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #030714;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
