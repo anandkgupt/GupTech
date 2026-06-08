@@ -26,6 +26,7 @@ import {
   ShieldCheck,
   ChevronRight
 } from "lucide-react";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   const { currentPath, navigate } = useRouter();
@@ -634,6 +635,9 @@ export default function App() {
 
       {/* Structured visual footer */}
       <Footer pillars={PILLARS_DATA} onNavigate={navigate} />
+      
+      {/* Vercel Web Analytics */}
+      <Analytics />
     </div>
   );
 }
