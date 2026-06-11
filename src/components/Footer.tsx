@@ -9,9 +9,9 @@ export default function Footer({ pillars, onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/5 bg-[#030714] relative z-10 pt-16 pb-12">
+    <footer className="border-t border-neutral-200 bg-neutral-50 relative z-10 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-12 border-b border-white/5">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-12 border-b border-neutral-200">
           <div className="space-y-2">
             <a 
               href="/"
@@ -19,9 +19,9 @@ export default function Footer({ pillars, onNavigate }: FooterProps) {
                 e.preventDefault();
                 onNavigate("/");
               }}
-              className="font-display text-4xl tracking-widest text-white cursor-pointer hover:text-sky-400 transition-colors block"
+              className="font-display text-4xl font-bold text-neutral-900 cursor-pointer hover:text-cyan-600 transition-colors block"
             >
-              GupTech
+              Factlive Tech
             </a>
             <p className="font-mono text-[10px] text-neutral-500 tracking-wider uppercase">
               Simple & affordable digital services
@@ -38,7 +38,7 @@ export default function Footer({ pillars, onNavigate }: FooterProps) {
                   e.preventDefault();
                   onNavigate(`/pillars?p=${pillar.id}`);
                 }}
-                className="font-mono text-[10px] text-neutral-500 hover:text-neutral-300 uppercase tracking-widest transition-colors cursor-pointer"
+                className="font-mono text-[10px] text-neutral-600 hover:text-cyan-600 uppercase tracking-widest transition-colors cursor-pointer"
               >
                 {pillar.name}
               </a>
@@ -47,12 +47,12 @@ export default function Footer({ pillars, onNavigate }: FooterProps) {
         </div>
 
         {/* Footnotes */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-8 text-[10px] font-mono text-neutral-600 tracking-widest uppercase">
-          <p>© {currentYear} GupTech. All Rights Reserved.</p>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-8 text-[10px] font-mono text-neutral-500 tracking-widest uppercase">
+          <p>© {currentYear} Factlive Tech. All Rights Reserved.</p>
           <div className="flex gap-4">
-            <span className="cursor-default hover:text-neutral-500 transition-colors">Security Audit Passed</span>
-            <span className="text-neutral-800">|</span>
-            <span className="cursor-default hover:text-neutral-500 transition-colors">v4.1.14 Core</span>
+            <span className="cursor-default hover:text-neutral-700 transition-colors">Reliable & Secure</span>
+            <span className="text-neutral-300">|</span>
+            <span className="cursor-default hover:text-neutral-700 transition-colors">Expert Support</span>
           </div>
         </div>
       </div>

@@ -21,9 +21,6 @@ export default function AboutUs() {
 
   return (
     <section id="about-section" className="border-t border-white/5 py-24 relative overflow-hidden">
-      <div className="absolute right-0 bottom-0 font-display text-[15vw] leading-none text-white/[0.012] pointer-events-none select-none tracking-wider uppercase">
-        GUPTECH
-      </div>
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
         {/* Left column */}
@@ -32,14 +29,8 @@ export default function AboutUs() {
             <span className="w-8 h-px bg-sky-400" />
             HOW WE HELP YOU
           </div>
-          <h3 className="font-display text-5xl md:text-7xl leading-none tracking-widest text-white uppercase">
-            RELIABLE & <br />
-            <span 
-              className="text-transparent italic"
-              style={{ WebkitTextStroke: "1px rgba(255,255,255,0.22)" }}
-            >
-              SIMPLE.
-            </span>
+          <h3 className="font-display text-4xl md:text-5xl font-bold leading-tight text-white uppercase">
+            Reliable and Simple Digital Solutions
           </h3>
           <p className="text-neutral-400 text-sm md:text-base font-light leading-relaxed max-w-lg">
             We combine high-quality website setup, simple local marketing, and pretty creative design under one roof. We don't just build websites; we help local shops, micro-companies, and individual self-employed professionals look trustworthy online, attract neighborhood visits, and save hours of work.

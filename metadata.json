@@ -1,6 +1,6 @@
 {
-  "name": "GupTech",
-  "description": "An interactive digital services platform comprising five custom-engineered capability pillars with active explorers, stats dashboard, dynamic service estimation tools, and deep visual themes.",
+  "name": "Factlive Tech",
+  "description": "A simplified, easy-to-use digital services platform with popular service checklists, live pricing estimator, downloadable PDF proposals, FAQs, and support.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

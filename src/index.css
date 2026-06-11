@@ -1,45 +1,49 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 
 @theme {
   --font-sans: "Epilogue", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Bebas Neue", sans-serif;
+  --font-display: "Epilogue", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  /* Premium Deep Dark Blue Cosmic Theme */
-  --color-bg-dark: #030714;
-  --color-bg-card: #0a1128;
-  --color-bg-card-hover: #121c42;
-  --color-border-subtle: rgba(56, 189, 248, 0.06);
-  --color-border-visible: rgba(244, 63, 94, 0.12);
+  /* Premium Regal Navy and Solar Yellow Light Theme */
+  --color-bg-dark: #ffffff; /* Crisp Pure Pearl White Page Background */
+  --color-bg-card: #f8fafc; /* Beautiful soft slate-white cards */
+  --color-bg-card-hover: #f1f5f9; /* Smooth cool-gray hover state */
+  --color-border-subtle: #e2e8f0; /* Simple subtle gray border */
+  --color-border-visible: #cbd5e1;
 
-  /* Refined Elegant Pillars Spectrum mapped to: dark blue, sky, white, red */
-  --color-pillar-cyan: #fb7185;
-  --color-pillar-orange: #38bdf8;
-  --color-pillar-violet: #ffffff;
-  --color-pillar-sky: #0ea5e9;
-  --color-pillar-green: #ef4444;
+  /* Refined Elegant Pillars Spectrum mapped to High-Contrast Navy, Coral, and Solar Yellow */
+  --color-pillar-cyan: #0284c7; /* Vivid Ocean Blue */
+  --color-pillar-orange: #d97706; /* High-contrast Warm Amber Gold */
+  --color-pillar-violet: #0f172a; /* Slate Slate Black */
+  --color-pillar-sky: #b45309; /* Rich Amber Bronze */
+  --color-pillar-green: #0d9488; /* Emerald Teal Accents */
+
+  /* Map the sky-* utility palette to high-energy Solar Yellow / Gold */
+  --color-sky-50: #fffdf0;
+  --color-sky-100: #fef9c3;
+  --color-sky-200: #fef08a;
+  --color-sky-300: #fde047;
+  --color-sky-450: #fbbf24;
+  --color-sky-400: #d97706; /* Darker warm amber for readable text on white backgrounds */
+  --color-sky-500: #b45309; /* Warm Core Gold */
+  --color-sky-600: #92400e; 
+  --color-sky-700: #78350f;
 }
 
 @layer base {
   body {
     background-color: var(--color-bg-dark);
-    color: #e4e4e7;
+    color: #1e293b; /* Premium dark slate text for perfect readability on white backgrounds */
     overflow-x: hidden;
     font-family: var(--font-sans);
   }
 
-  /* Grid pattern overlay - ambient neon on deep canvas */
+  /* Keep background simple without grids or futuristic lines */
   .grid-pattern-bg {
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
-    z-index: 0;
+    display: none;
   }
 
   /* Smooth scroll behavior */
@@ -47,19 +51,151 @@
     scroll-behavior: smooth;
   }
 
-  /* Custom subtle scrollbar designed for dark backgrounds */
+  /* No dynamic text stroke adjustment needed on simple display theme */
+  h1 span[style*="WebkitTextStroke"] {
+    -webkit-text-stroke: 0px transparent !important;
+  }
+
+  /* Custom clean high-contrast scrollbar for light theme */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #030714;
+    background: #ffffff;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(11, 21, 54, 0.08);
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(11, 21, 54, 0.18);
   }
+}
+
+/* SMART GLOBAL UTILITY OVERRIDES FOR SEAMLESS NAVY BLUE, WHITE, & SOLAR YELLOW LIGHT LIGHT THEME */
+
+/* Legible soft lines on white background */
+.border-white\/5 {
+  border-color: rgba(11, 21, 54, 0.08) !important;
+}
+.border-white\/10 {
+  border-color: rgba(11, 21, 54, 0.15) !important;
+}
+
+/* Deep Obsidian background codes mapped to pure white with light gold glow patterns */
+.bg-\[\#030714\], 
+.bg-\[\#020510\]\/80,
+.bg-\[\#030714\]\/90,
+.bg-\[\#030714\]\/60 {
+  background-color: #ffffff !important;
+  color: #1e293b !important;
+}
+
+/* Hardcoded container panels mapping to soft elegant alabaster glass shields */
+.bg-\[\#0a1128\],
+.bg-\[\#0c1017\],
+.bg-\[\#0a1128\]\/60 {
+  background-color: #f8fafc !important; /* Elegant Soft Slate-White */
+  border: 1px solid #e2e8f0 !important; /* Simple light border */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+  color: #1e293b !important;
+}
+
+.hover\:border-white\/10:hover {
+  border-color: #cbd5e1 !important;
+}
+
+/* Dynamic exception mapping: Keep colored button text and explicit fills perfectly white */
+button.bg-sky-400,
+button.bg-sky-500,
+a.bg-sky-400,
+.bg-sky-400 .text-black,
+.bg-sky-405, .text-sky-405,
+.bg-sky-500 .text-white,
+.active-check,
+.bg-emerald-500 .text-white,
+.bg-red-500 .text-white,
+.bg-sky-500\/10 .text-white,
+.bg-violet-400 .text-black,
+.bg-amber-400 .text-black {
+  color: #0b1536 !important; /* Keep navy blue text readable on hot gold backgrounds */
+}
+
+/* Interactive control highlights mapping to beautiful amber gold action */
+button.bg-sky-400, a.bg-sky-400, .bg-sky-400 {
+  color: #ffffff !important; /* Beautiful white/contrast text */
+  background-color: #0c4a6e !important; /* Deep Regal Navy button backgrounds */
+}
+button.bg-sky-400:hover, a.bg-sky-400:hover {
+  background-color: #fbbf24 !important; /* Illuminates to Solar Yellow hover state */
+  color: #0b1536 !important;
+}
+
+.text-neutral-400:hover {
+  color: #0c4a6e !important;
+}
+
+/* Browser address bar style */
+.bg-\[\#040817\] {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+}
+
+/* Inner panels inside card arrays */
+.bg-black\/40 {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+.bg-black\/20 {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+.bg-\[\#06080b\]\/40 {
+  background-color: #f8fafc !important;
+}
+
+/* High contrast typography adjustments to honor white background */
+.text-white {
+  color: #08112c !important; /* Deep Midnight Navy for titles */
+}
+.text-neutral-50, .text-slate-50 {
+  color: #08112c !important;
+}
+.text-neutral-100, .text-slate-100 {
+  color: #08112c !important;
+}
+.text-neutral-200, .text-slate-200 {
+  color: #0f1a36 !important; /* Highly-readable solid dark text */
+}
+.text-neutral-300, .text-slate-300 {
+  color: #1e293b !important; /* Premium dark slate body elements */
+}
+.text-neutral-400, .text-slate-400 {
+  color: #334155 !important; /* Dark charcoal subheaders and descriptive tags */
+}
+.text-neutral-505, .text-slate-505,
+.text-neutral-500, .text-slate-500 {
+  color: #475569 !important; /* Very crisp readable grey */
+}
+.text-neutral-600, .text-slate-600 {
+  color: #64748b !important;
+}
+
+/* Active headers overlay maps */
+.bg-white\/5 {
+  background-color: rgba(12, 74, 110, 0.05) !important;
+  border-color: rgba(12, 74, 110, 0.1) !important;
+}
+.bg-white\/10 {
+  background-color: rgba(12, 74, 110, 0.09) !important;
+  border-color: rgba(12, 74, 110, 0.15) !important;
+}
+
+/* Perfect readable inputs/selects on white form fields */
+input, select, textarea {
+  color: #0b1536 !important;
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
 }

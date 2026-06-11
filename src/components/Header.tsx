@@ -34,7 +34,7 @@ export default function Header({ pillars, currentPath, onNavigate }: HeaderProps
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#030714]/95 backdrop-blur-md border-b border-white/5 py-3 shadow-[0_4px_20px_-5px_rgba(56,189,248,0.1)]"
+          ? "bg-white/95 backdrop-blur-md border-b border-neutral-200 py-3 shadow-xs"
           : "bg-transparent border-b border-transparent py-5"
       }`}
     >
@@ -47,19 +47,18 @@ export default function Header({ pillars, currentPath, onNavigate }: HeaderProps
             setMobileMenuOpen(false);
             onNavigate("/");
           }}
-          className="flex items-center gap-3 cursor-pointer group z-50 animate-fade-in"
+          className="flex items-center gap-2.5 cursor-pointer group z-50 animate-fade-in"
         >
           <div className="relative flex items-center justify-center">
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)] animate-pulse" />
-            <span className="absolute w-2.5 h-2.5 rounded-full bg-red-500/40 animate-ping" />
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
           </div>
-          <span className="font-display text-2xl tracking-widest text-white group-hover:text-sky-400 transition-colors">
-            GupTech
+          <span className="font-display text-2xl font-bold tracking-tight text-white group-hover:text-neutral-600 transition-colors">
+            Factlive Tech
           </span>
         </a>
 
         {/* Navigation links (Desktop) */}
-        <div className="hidden md:flex items-center gap-1 bg-white/5 p-1 rounded-lg border border-white/5">
+        <div className="hidden md:flex items-center gap-1 bg-neutral-100 p-1 rounded-lg border border-neutral-200">
           {navItems.map((item) => {
             const isActive = currentPath === item.path;
             return (
@@ -72,8 +71,8 @@ export default function Header({ pillars, currentPath, onNavigate }: HeaderProps
                 }}
                 className={`text-[10px] tracking-widest uppercase font-mono px-4 py-1.5 rounded-md transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? "bg-sky-500/10 text-sky-400 border border-sky-500/10 font-semibold shadow-sm"
-                    : "text-neutral-400 hover:text-white border border-transparent"
+                    ? "bg-white text-cyan-600 border border-neutral-200 font-semibold shadow-xs"
+                    : "text-neutral-500 hover:text-neutral-800 border border-transparent"
                 }`}
               >
                 {item.label}
@@ -89,7 +88,7 @@ export default function Header({ pillars, currentPath, onNavigate }: HeaderProps
             e.preventDefault();
             onNavigate("/estimator");
           }}
-          className="hidden md:inline-flex relative items-center gap-2 text-xs font-mono tracking-wider font-semibold border border-sky-500/35 text-sky-400 px-4 py-2 rounded-md hover:bg-sky-400 hover:text-black transition-all duration-300 hover:scale-[1.02] active:scale-95 cursor-pointer"
+          className="hidden md:inline-flex items-center gap-2 text-xs font-mono tracking-wider font-semibold bg-[#0c4a6e] text-white hover:bg-amber-500 hover:text-[#0b1536] px-4 py-2 rounded-md transition-all duration-200 cursor-pointer"
         >
           GET PRICING
           <ArrowRight className="w-3.5 h-3.5" />

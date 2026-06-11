@@ -30,7 +30,7 @@ export const INDUSTRIES_DATA: IndustryBundle[] = [
     name: "Local Retail & Shops",
     subtitle: "Bakeries, boutique stores, pharmacies, florists, and neighborhood shops.",
     icon: Store,
-    quote: "GupTech set up my florist shop's Google map listing, a pretty local website, and business logo. Within weeks, we got a 30% increase in local walk-in customers!",
+    quote: "Factlive Tech set up my florist shop's Google map listing, a pretty local website, and business logo. Within weeks, we got a 30% increase in local walk-in customers!",
     author: "Elena R., Flower Petals Boutique",
     bgHexColors: "from-sky-500/10 to-transparent",
     recommendedServices: [
@@ -60,7 +60,7 @@ export const INDUSTRIES_DATA: IndustryBundle[] = [
     name: "Salons, Spas & Home Services",
     subtitle: "Hair stylists, massage therapists, plumbers, gardeners, and electricians.",
     icon: Scissors,
-    quote: "I can cut hair, but I don't know how to run databases or websites. GupTech installed an automated web helper to book clients on my phone. Pure magic!",
+    quote: "I can cut hair, but I don't know how to run databases or websites. Factlive Tech installed an automated web helper to book clients on my phone. Pure magic!",
     author: "Marc K., Scissors & Comb Studio",
     bgHexColors: "from-white/10 to-transparent",
     recommendedServices: [
@@ -90,7 +90,7 @@ export const INDUSTRIES_DATA: IndustryBundle[] = [
     name: "Education, Coaches & Tutors",
     subtitle: "Local schools, online course creators, academic tutors, sports coaches, and music academies.",
     icon: GraduationCap,
-    quote: "With GupTech's easy WordPress setup and chatbot, our students' parents find details instantly on their phones. We save hours answering repetitive scheduling questions!",
+    quote: "With Factlive Tech's easy WordPress setup and chatbot, our students' parents find details instantly on their phones. We save hours answering repetitive scheduling questions!",
     author: "Ms. Clara T., Harmony Music Academy",
     bgHexColors: "from-red-500/10 to-transparent",
     recommendedServices: [

@@ -12,11 +12,7 @@ export default function Hero({ pillars, onNavigate }: HeroProps) {
   };
 
   return (
-    <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 min-h-[85vh] flex flex-col justify-center overflow-hidden">
-      {/* Absolute Giant Background Title */}
-      <div className="absolute right-0 top-12 font-display text-[15vw] leading-none text-zinc-950/[0.02] pointer-events-none select-none whitespace-nowrap tracking-wide">
-        SERVICES
-      </div>
+    <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 min-h-[75vh] flex flex-col justify-center overflow-hidden">
 
       <div className="relative max-w-4xl">
         {/* Animated tag */}
@@ -30,23 +26,14 @@ export default function Hero({ pillars, onNavigate }: HeroProps) {
           Simple & affordable digital services for small businesses
         </motion.div>
 
-        {/* Master Bebas H1 */}
+        {/* Simplified Header */}
         <motion.h1 
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="font-display text-7xl md:text-9xl lg:text-[140px] leading-[0.88] tracking-wider text-white mb-8"
+          className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight"
         >
-          BUILD.
-          <br />
-          <span 
-            className="text-transparent italic"
-            style={{ WebkitTextStroke: "1.5px rgba(255, 255, 255, 0.2)" }}
-          >
-            LAUNCH.
-          </span>
-          <br />
-          GROW.
+          Simple Technology Services for Local Businesses
         </motion.h1>
 
         {/* Supporting description */}

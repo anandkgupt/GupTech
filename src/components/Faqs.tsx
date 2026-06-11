@@ -22,7 +22,7 @@ export default function Faqs({ faqs }: FaqsProps) {
             COMMON QUESTIONS
           </div>
           <h3 className="font-display text-4xl md:text-5xl text-white tracking-widest uppercase">
-            LEARN ABOUT GupTech
+            LEARN ABOUT Factlive Tech
           </h3>
           <p className="text-neutral-400 text-sm font-light max-w-md mx-auto">
             Find answers to standard delivery options, multi-disciplinary integrations, and contractual SOW standards.
