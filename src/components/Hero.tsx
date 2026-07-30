@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Pillar } from "../types";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 interface HeroProps {
   pillars: Pillar[];
@@ -7,12 +8,8 @@ interface HeroProps {
 }
 
 export default function Hero({ pillars, onNavigate }: HeroProps) {
-  const handlePillarClick = (id: string) => {
-    onNavigate(`/pillars?p=${id}`);
-  };
-
   return (
-    <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 min-h-[75vh] flex flex-col justify-center overflow-hidden">
+    <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 min-h-[70vh] flex flex-col justify-center overflow-hidden">
 
       <div className="relative max-w-4xl">
         {/* Animated tag */}
@@ -23,7 +20,7 @@ export default function Hero({ pillars, onNavigate }: HeroProps) {
           className="font-mono text-xs tracking-[0.2em] text-sky-400 uppercase flex items-center gap-3.5 mb-6"
         >
           <span className="w-8 h-px bg-sky-400" />
-          Simple & affordable digital services for small businesses
+          FactLive Digital Solutions — "Go Digital. Go Live."
         </motion.div>
 
         {/* Simplified Header */}
@@ -31,9 +28,9 @@ export default function Hero({ pillars, onNavigate }: HeroProps) {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight"
+          className="font-display text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight"
         >
-          Simple Technology Services for Local Businesses
+          We Build. We Grow. <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-300">We Elevate.</span>
         </motion.h1>
 
         {/* Supporting description */}
@@ -41,55 +38,33 @@ export default function Hero({ pillars, onNavigate }: HeroProps) {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-neutral-300 text-lg md:text-xl font-light leading-relaxed max-w-xl mb-12"
+          className="text-slate-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl mb-10"
         >
-          Everything you need to launch and grow your business online – from setting up a fast website or online shop to beautiful branding, local marketing, and automated helpers.
+          Empowering businesses with high-performance web development, SEO, digital branding, e-commerce portals, and business analytics solutions that create impact and deliver results.
         </motion.p>
 
-        {/* Dynamic Selector Pills with custom color styling pointers */}
+        {/* Clean Primary Actions */}
         <motion.div 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45 }}
-          className="flex flex-wrap gap-2.5"
+          className="flex flex-wrap items-center gap-4"
         >
-          {pillars.map((p) => {
-            let borderStyle = "";
-            let textStyle = "";
+          <button
+            onClick={() => onNavigate("/pillars")}
+            className="bg-sky-500 hover:bg-sky-400 text-slate-950 font-mono font-bold text-xs px-6 py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(0,210,255,0.4)] flex items-center gap-2 cursor-pointer"
+          >
+            <span>Explore Services</span>
+            <ArrowRight className="w-4 h-4 text-slate-950" />
+          </button>
 
-            switch (p.colorName) {
-              case "cyan":
-                borderStyle = "border-red-500/20";
-                textStyle = "text-red-400 hover:bg-red-500/5 bg-red-500/[0.04]";
-                break;
-              case "orange":
-                borderStyle = "border-sky-500/20";
-                textStyle = "text-sky-400 hover:bg-sky-500/5 bg-sky-500/[0.04]";
-                break;
-              case "violet":
-                borderStyle = "border-white/20";
-                textStyle = "text-white hover:bg-white/5 bg-white/[0.04]";
-                break;
-              case "sky":
-                borderStyle = "border-sky-500/20";
-                textStyle = "text-sky-400 hover:bg-sky-500/5 bg-sky-500/[0.04]";
-                break;
-              case "green":
-                borderStyle = "border-red-500/20";
-                textStyle = "text-red-400 hover:bg-red-500/5 bg-red-500/[0.04]";
-                break;
-            }
-
-            return (
-              <button
-                key={p.id}
-                onClick={() => handlePillarClick(p.id)}
-                className={`font-mono text-[10px] tracking-wider uppercase border rounded-full px-4 py-2 transition-all duration-300 cursor-pointer ${borderStyle} ${textStyle}`}
-              >
-                {p.num} {p.name}
-              </button>
-            );
-          })}
+          <button
+            onClick={() => onNavigate("/about")}
+            className="bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 font-mono text-xs px-6 py-3.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4 text-sky-400" />
+            <span>About FactLive &amp; Founder</span>
+          </button>
         </motion.div>
       </div>
     </div>

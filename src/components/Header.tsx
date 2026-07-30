@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Pillar } from "../types";
+import { AnandLogo } from "./AnandLogo";
 
 interface HeaderProps {
   pillars: Pillar[];
@@ -23,6 +24,7 @@ export default function Header({ pillars, currentPath, onNavigate }: HeaderProps
 
   const navItems = [
     { label: "Home", path: "/" },
+    { label: "My Ventures", path: "/ventures" },
     { label: "Services", path: "/pillars" },
     { label: "Solutions", path: "/solutions" },
     { label: "Industries", path: "/industries" },
@@ -34,8 +36,8 @@ export default function Header({ pillars, currentPath, onNavigate }: HeaderProps
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md border-b border-neutral-200 py-3 shadow-xs"
-          : "bg-transparent border-b border-transparent py-5"
+          ? "bg-slate-950/95 backdrop-blur-md border-b border-slate-800/80 py-3 shadow-md"
+          : "bg-slate-950/80 backdrop-blur-xs border-b border-slate-900/50 py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -49,16 +51,11 @@ export default function Header({ pillars, currentPath, onNavigate }: HeaderProps
           }}
           className="flex items-center gap-2.5 cursor-pointer group z-50 animate-fade-in"
         >
-          <div className="relative flex items-center justify-center">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-          </div>
-          <span className="font-display text-2xl font-bold tracking-tight text-white group-hover:text-neutral-600 transition-colors">
-            Factlive Tech
-          </span>
+          <AnandLogo size="md" lightText={true} />
         </a>
 
         {/* Navigation links (Desktop) */}
-        <div className="hidden md:flex items-center gap-1 bg-neutral-100 p-1 rounded-lg border border-neutral-200">
+        <div className="hidden md:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800/90 backdrop-blur-md shadow-lg">
           {navItems.map((item) => {
             const isActive = currentPath === item.path;
             return (
@@ -69,10 +66,10 @@ export default function Header({ pillars, currentPath, onNavigate }: HeaderProps
                   e.preventDefault();
                   onNavigate(item.path);
                 }}
-                className={`text-[10px] tracking-widest uppercase font-mono px-4 py-1.5 rounded-md transition-all duration-300 cursor-pointer ${
+                className={`text-[10px] tracking-widest uppercase font-mono px-3.5 py-1.5 rounded-lg transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? "bg-white text-cyan-600 border border-neutral-200 font-semibold shadow-xs"
-                    : "text-neutral-500 hover:text-neutral-800 border border-transparent"
+                    ? "bg-sky-500 text-slate-950 font-extrabold shadow-[0_0_12px_rgba(0,210,255,0.4)]"
+                    : "text-slate-300 hover:text-white hover:bg-slate-800/80"
                 }`}
               >
                 {item.label}

@@ -144,7 +144,7 @@ export default function Estimator({
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(22);
     doc.setTextColor(6, 8, 11);
-    doc.text("Factlive Tech", 15, 23);
+    doc.text("Anand Analyst", 15, 23);
 
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(8);
@@ -178,7 +178,7 @@ export default function Estimator({
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(9.5);
     doc.setTextColor(60, 70, 80);
-    const scopeOverview = `This Statement of Work (SOW) outlines your configured technology delivery profile consisting of ${selectedServices.length} custom-tailored operational capabilities selected from Factlive Tech's services. The requirements, estimated duration, and pricing are compiled dynamically below:`;
+    const scopeOverview = `This Statement of Work (SOW) outlines your configured technology delivery profile consisting of ${selectedServices.length} custom-tailored operational capabilities selected from Anand Analyst's services. The requirements, estimated duration, and pricing are compiled dynamically below:`;
     const splitOverview = doc.splitTextToSize(scopeOverview, 180);
     doc.text(splitOverview, 15, y);
     y += splitOverview.length * 5 + 6;
@@ -379,11 +379,11 @@ export default function Estimator({
       doc.setFontSize(8);
       doc.setTextColor(160, 170, 185);
       doc.text(`Page ${i} of ${pageNumCount}`, 105, 287, { align: "center" });
-      doc.text("FACTLIVE TECH DIGITAL SERVICES PLATFORM SOW GENERATOR", 15, 287);
+      doc.text("ANAND ANALYST DIGITAL SERVICES PLATFORM SOW GENERATOR", 15, 287);
     }
 
     // Trigger immediate browser dynamic download
-    const cleanCompanyName = company ? company.toLowerCase().replace(/[^a-z0-9]/g, "_") : "factlive_tech";
+    const cleanCompanyName = company ? company.toLowerCase().replace(/[^a-z0-9]/g, "_") : "anand_analyst";
     doc.save(`${cleanCompanyName}_sow_proposal.pdf`);
   };
 
@@ -413,11 +413,11 @@ Select active capability items in the directory sections above to automatically 
       }
     });
 
-    const sow = `## Factlive Tech STATEMENT OF WORK (SOW)
+    const sow = `## Anand Analyst STATEMENT OF WORK (SOW)
 *Draft Proposal — Real-time Generation*
 
 ### 1. ENGAGEMENT SCOPE SUMMARY
-Integrated technology delivery engagement consisting of ${selectedServices.length} custom operational deliverables selected from Factlive Tech's services:
+Integrated technology delivery engagement consisting of ${selectedServices.length} custom operational deliverables selected from Anand Analyst's services:
 
 ${pillarBreakdowns}
 ### 2. CORE DELIVERABLE PARAMETERS
@@ -697,7 +697,7 @@ ${pillarBreakdowns}
                   <ShieldCheck className="w-10 h-10 text-emerald-400 mx-auto" />
                   <h5 className="text-sm font-bold text-emerald-400">Workshop Request Cached!</h5>
                   <p className="text-xs text-neutral-400 max-w-xs mx-auto">
-                    Thank you {name}. A Factlive Tech advisor will reach out to you at <strong className="text-white">{email}</strong> to validate your {selectedServices.length}-service configuration.
+                    Thank you {name}. An Anand Analyst advisor will reach out to you at <strong className="text-white">{email}</strong> to validate your {selectedServices.length}-service configuration.
                   </p>
                 </div>
               ) : (

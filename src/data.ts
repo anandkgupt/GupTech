@@ -348,7 +348,7 @@ export const FAQS_DATA: FaqItem[] = [
   },
   {
     q: "Can we combine multiple services from different pillars?",
-    a: "Yes. In fact, most Factlive Tech engagements are cross-pillar. A typical product launch blends 'Websites & Tech Setup' (01) for your core website, 'Creative Design & Branding' (03) for branding, and 'Marketing & Customer Growth' (02) for attracting customers."
+    a: "Yes. In fact, most Anand Analyst engagements are cross-pillar. A typical product launch blends 'Websites & Tech Setup' (01) for your core website, 'Creative Design & Branding' (03) for branding, and 'Marketing & Customer Growth' (02) for attracting customers."
   },
   {
     q: "What is your delivery methodology?",

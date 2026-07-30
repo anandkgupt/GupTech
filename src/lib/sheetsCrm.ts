@@ -78,7 +78,7 @@ export const getActiveToken = (): string | null => cachedAccessToken;
 // Local Lead Storage helpers
 export const loadLocalLeads = (): LeadItem[] => {
   try {
-    const raw = localStorage.getItem("factlive_crm_local_leads");
+    const raw = localStorage.getItem("anand_crm_local_leads");
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
     console.error("Failed to parse local leads from cache:", e);
@@ -87,7 +87,7 @@ export const loadLocalLeads = (): LeadItem[] => {
 };
 
 export const saveLocalLeads = (leads: LeadItem[]): void => {
-  localStorage.setItem("factlive_crm_local_leads", JSON.stringify(leads));
+  localStorage.setItem("anand_crm_local_leads", JSON.stringify(leads));
 };
 
 export const addLocalLead = (lead: Omit<LeadItem, "id" | "timestamp" | "status" | "notes" | "counselor">): LeadItem => {
@@ -150,19 +150,19 @@ export const createCrmSpreadsheet = async (token: string): Promise<string> => {
     })
   });
 
-  localStorage.setItem("factlive_crm_spreadsheet_id", spreadsheetId);
+  localStorage.setItem("anand_crm_spreadsheet_id", spreadsheetId);
   return spreadsheetId;
 };
 
 export const getSavedSpreadsheetId = (): string | null => {
-  return localStorage.getItem("factlive_crm_spreadsheet_id");
+  return localStorage.getItem("anand_crm_spreadsheet_id");
 };
 
 export const setSavedSpreadsheetId = (id: string): void => {
   if (id.trim()) {
-    localStorage.setItem("factlive_crm_spreadsheet_id", id.trim());
+    localStorage.setItem("anand_crm_spreadsheet_id", id.trim());
   } else {
-    localStorage.removeItem("factlive_crm_spreadsheet_id");
+    localStorage.removeItem("anand_crm_spreadsheet_id");
   }
 };
 

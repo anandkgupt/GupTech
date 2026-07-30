@@ -15,6 +15,7 @@ import {
   Compass,
   MessageCircle
 } from "lucide-react";
+import { AnandLogo } from "./AnandLogo";
 
 interface ProgramDetail {
   title: string;
@@ -121,6 +122,7 @@ export default function AdmissionFlashCard() {
           {/* Main Title info block */}
           <div className="lg:col-span-7 space-y-4">
             <div className="flex flex-wrap items-center gap-3">
+              <AnandLogo size="sm" lightText={true} />
               <span className="font-mono text-[9px] tracking-widest text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full uppercase flex items-center gap-1.5 font-bold animate-pulse">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
                 ADMISSION OPEN 2026
@@ -335,19 +337,19 @@ export default function AdmissionFlashCard() {
           </div>
 
           <div 
-            onClick={() => handleCopyCoord("factlive.in@gmail.com", "email")}
+            onClick={() => handleCopyCoord("anandanalyst.in@gmail.com", "email")}
             className="flex items-center gap-3 bg-neutral-900/30 hover:bg-neutral-900/50 p-3 rounded-xl border border-white/[0.02] hover:border-white/5 cursor-pointer transition-colors"
           >
             <Mail className="w-4 h-4 text-sky-400 shrink-0" />
             <div>
               <div className="font-mono text-[9px] text-neutral-500 uppercase tracking-wider">Official Email</div>
-              <div className="text-xs font-semibold text-white font-mono break-all">factlive.in@gmail.com</div>
+              <div className="text-xs font-semibold text-white font-mono break-all">anandanalyst.in@gmail.com</div>
             </div>
             {copiedText === "email" && <span className="ml-auto text-[9px] font-mono text-emerald-400 uppercase">Copied</span>}
           </div>
 
           <a 
-            href="https://factlive.in/admission"
+            href="https://anandanalyst.in/admission"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 bg-neutral-900/30 hover:bg-neutral-900/50 p-3 rounded-xl border border-white/[0.02] hover:border-white/5 cursor-pointer transition-colors"
@@ -355,7 +357,7 @@ export default function AdmissionFlashCard() {
             <ExternalLink className="w-4 h-4 text-sky-400 shrink-0" />
             <div>
               <div className="font-mono text-[9px] text-neutral-500 uppercase tracking-wider">Consultation Portal</div>
-              <div className="text-xs font-semibold text-white font-mono">factlive.in/admission</div>
+              <div className="text-xs font-semibold text-white font-mono">anandanalyst.in/admission</div>
             </div>
           </a>
 

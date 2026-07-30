@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { jsPDF } from "jspdf";
 import CrmAdminPanel from "./components/CrmAdminPanel";
+import { AnandLogo } from "./components/AnandLogo";
+import { MyVentures } from "./components/MyVentures";
+import { ProfessionalProfile } from "./components/ProfessionalProfile";
 import { 
   addLocalLead, 
   getActiveToken, 
@@ -223,7 +226,7 @@ export const GRAPHIC_THEMES: Record<string, ThemeConfig> = {
 };
 
 export default function App() {
-  const [activePage, setActivePage] = useState<"home" | "services" | "learning" | "about">("home");
+  const [activePage, setActivePage] = useState<"anand" | "services" | "learning" | "about" | "ventures">("anand");
   
   // Counselor CRM unified auth state
   const [crmUser, setCrmUser] = useState<any>(null);
@@ -297,8 +300,10 @@ export default function App() {
     if (params.get("company")) setCompany(params.get("company") || "");
     
     const pageRaw = params.get("page");
-    if (pageRaw === "about" || pageRaw === "services" || pageRaw === "learning" || pageRaw === "home") {
+    if (pageRaw === "about" || pageRaw === "services" || pageRaw === "learning" || pageRaw === "anand" || pageRaw === "ventures") {
       setActivePage(pageRaw as any);
+    } else if (pageRaw === "home") {
+      setActivePage("anand");
     }
 
     const themeRaw = params.get("theme");
@@ -367,7 +372,7 @@ export default function App() {
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(22);
     doc.setTextColor(11, 21, 54);
-    doc.text("Factlive Tech", 15, 23);
+    doc.text("Anand Analyst", 15, 23);
 
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(8);
@@ -456,10 +461,10 @@ export default function App() {
     doc.setTextColor(100, 116, 139);
     doc.text("This SOW is a customized, digital estimate proposal outlining specific technological modules checked by the client.", 15, y);
     y += 4.5;
-    doc.text("We do not add hidden fees or setup premiums. Contact hello@factlivetech.com to finalize your workspace deployment.", 15, y);
+    doc.text("We do not add hidden fees or setup premiums. Contact hello@anandanalyst.com to finalize your workspace deployment.", 15, y);
 
     // Save
-    doc.save(`${company ? company.toLowerCase().replace(/[^a-z0-9]/g, "_") : "factlive_tech"}_estimate.pdf`);
+    doc.save(`${company ? company.toLowerCase().replace(/[^a-z0-9]/g, "_") : "anand_analyst"}_estimate.pdf`);
   };
 
   const handleConsultationSubmit = (e: React.FormEvent) => {
@@ -592,7 +597,7 @@ export default function App() {
           {/* Logo element */}
           <button 
             onClick={() => {
-              setActivePage("home");
+              setActivePage("anand");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
             className="flex items-center gap-2.5 cursor-pointer group bg-transparent border-0 outline-none shrink-0"
@@ -601,21 +606,31 @@ export default function App() {
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
             </div>
             <span className="font-display text-lg font-extrabold tracking-tight text-slate-900 group-hover:text-slate-600 transition-colors">
-              Factlive Tech
+              Anand Analyst
             </span>
           </button>
 
           {/* PAGE NAVIGATION HEADERS: State based menu selections with highlight states */}
           <div className="hidden md:flex items-center gap-2 bg-slate-100 p-1 rounded-xl">
             <button
-              onClick={() => setActivePage("home")}
+              onClick={() => setActivePage("anand")}
               className={`px-4 py-2 rounded-lg text-xs font-mono font-bold uppercase transition-all duration-150 ${
-                activePage === "home"
+                activePage === "anand"
                   ? "bg-white text-slate-900 shadow-xs"
                   : "text-slate-500 hover:text-slate-900"
               }`}
             >
               Home
+            </button>
+            <button
+              onClick={() => setActivePage("ventures")}
+              className={`px-4 py-2 rounded-lg text-xs font-mono font-bold uppercase transition-all duration-150 ${
+                activePage === "ventures"
+                  ? "bg-white text-sky-600 shadow-xs font-extrabold"
+                  : "text-slate-500 hover:text-sky-500"
+              }`}
+            >
+              My Ventures
             </button>
             <button
               onClick={() => setActivePage("services")}
@@ -675,7 +690,9 @@ export default function App() {
                   </button>
                 ))}
               </div>
-                   <button
+            </div>
+
+            <button
               onClick={() => setActivePage("about")}
               className="hidden md:inline-flex items-center gap-1.5 text-xs font-mono font-bold bg-slate-900 text-white hover:bg-amber-500 hover:text-slate-900 px-4 py-2 rounded-lg transition-all"
             >
@@ -710,12 +727,20 @@ export default function App() {
         {/* MOBILE PAGE NAVIGATION: visible only on small screens */}
         <div className="md:hidden flex items-center justify-around mt-3 border-t border-slate-100 pt-2 px-4 gap-1">
           <button
-            onClick={() => setActivePage("home")}
+            onClick={() => setActivePage("anand")}
             className={`px-3 py-1.5 rounded-lg text-[11px] font-mono font-bold uppercase ${
-              activePage === "home" ? "bg-slate-900 text-white" : "text-slate-500"
+              activePage === "anand" ? "bg-slate-900 text-white" : "text-slate-500"
             }`}
           >
             Home
+          </button>
+          <button
+            onClick={() => setActivePage("ventures")}
+            className={`px-3 py-1.5 rounded-lg text-[11px] font-mono font-bold uppercase ${
+              activePage === "ventures" ? "bg-sky-500 text-slate-950 font-extrabold" : "text-slate-500"
+            }`}
+          >
+            Ventures
           </button>
           <button
             onClick={() => setActivePage("services")}
@@ -745,8 +770,8 @@ export default function App() {
             onClick={navigateAndScrollToCrm}
             className={`px-3 py-1.5 rounded-lg text-[11px] font-mono font-bold uppercase flex items-center gap-1 ${
               crmUser 
-                ? "bg-emerald-50 text-emerald-800 border border-emerald-200" 
-                : "bg-amber-50 text-amber-900 border border-amber-200"
+                ? "bg-emerald-50 text-emerald-800 border border-emerald-250" 
+                : "bg-amber-50 text-amber-900 border border-amber-250"
             }`}
           >
             {crmUser ? (
@@ -761,17 +786,30 @@ export default function App() {
               </>
             )}
           </button>
-        </div>        </div>
+        </div>
       </nav>
 
       {/* Main Container with smooth view switcher animations */}
       <main className="flex-grow">
         <AnimatePresence mode="wait">
           
-          {/* PAGE VIEW: HOME PAGE */}
-          {activePage === "home" && (
+          {/* PAGE VIEW: MY VENTURES PAGE */}
+          {activePage === "ventures" && (
             <motion.div
-              key="home-page"
+              key="ventures-page"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <MyVentures onNavigatePage={setActivePage} currentTheme={currentTheme} />
+            </motion.div>
+          )}
+
+          {/* PAGE VIEW: ANAND PAGE */}
+          {activePage === "anand" && (
+            <motion.div
+              key="anand-page"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -783,14 +821,18 @@ export default function App() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/[0.04] via-transparent to-transparent pointer-events-none" />
                 
                 <div className="max-w-5xl mx-auto px-6 text-center space-y-6 relative">
+                  <div className="flex justify-center pb-2">
+                    <AnandLogo size="xl" lightText={false} className="bg-slate-900/90 p-4 rounded-3xl border border-slate-800 shadow-xl" />
+                  </div>
+
                   <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase bg-amber-100 text-amber-900 px-3.5 py-1.5 rounded-full font-bold tracking-wider animate-bounce">
                     <Sparkles className="w-3.5 h-3.5 text-amber-700" /> REVOLUTIONIZING LOCAL BUSINESS INFRASTRUCTURE
                   </span>
 
-                  <h1 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 leading-none">
-                    Digital Technology Setup <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-cyan-800 to-slate-900">
-                      Done Simpler & Faster
+                  <h1 className="text-4xl md:text-6xl font-black tracking-tight text-slate-900 leading-tight">
+                    Welcome to my portfolio <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-cyan-800 to-amber-600">
+                      Anand K Gupt
                     </span>
                   </h1>
 
@@ -830,6 +872,9 @@ export default function App() {
                   </div>
 
                   <div className="pt-4 flex flex-wrap justify-center gap-4 text-xs font-mono font-bold text-slate-500">
+                    <span className="flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-900 px-3 py-1.5 rounded-lg shadow-2xs">
+                      ♟️ Chess Habit & Strategic Analysis
+                    </span>
                     <span className="flex items-center gap-1 bg-white border border-slate-100 px-3 py-1.5 rounded-lg shadow-2xs">
                       ✓ No monthly design retainers
                     </span>
@@ -843,377 +888,57 @@ export default function App() {
                 </div>
               </section>
 
-              {/* SECTION: Admissions Counselor CRM Dashboard Control */}
-              <section className="max-w-5xl mx-auto px-6">
-                <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden shadow-xl">
-                  <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/[0.015] rounded-full blur-3xl pointer-events-none" />
-                  
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-slate-800 pb-6">
-                    <div className="space-y-1.5">
-                      <div className="flex items-center gap-2">
-                        <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
-                        <span className="text-[10px] font-mono font-bold tracking-widest text-amber-400 uppercase">
-                          OFFICIAL WORKSPACE CONTROL
-                        </span>
-                      </div>
-                      <h2 className="text-xl md:text-2xl font-black text-white tracking-tight uppercase flex items-center gap-2">
-                        <Database className="w-5 h-5 text-amber-400" /> Admissions & Leads CRM Center
-                      </h2>
-                      <p className="text-slate-400 text-xs font-light max-w-2xl leading-relaxed font-sans">
-                        Authorize with your certified Google Sheets and Drive account to activate real-time admissions sync, track dynamic counselor notes, and start WhatsApp counseling dials instantly.
-                      </p>
-                    </div>
-
-                    <div className="shrink-0 font-sans">
-                      {crmUser ? (
-                        <div className="bg-emerald-950/40 border border-emerald-500/30 p-3 rounded-xl flex items-center gap-2.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                          <div className="text-left font-mono">
-                            <span className="text-[9px] text-emerald-400 uppercase font-black block">COUNSELOR PORTAL INBOUND</span>
-                            <span className="text-xs text-white block max-w-[170px] truncate">{crmUser.email}</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="bg-slate-950/50 border border-slate-800/80 p-3 rounded-xl flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-slate-600" />
-                          <div className="text-left font-mono">
-                            <span className="text-[9px] text-slate-500 uppercase font-bold block">CONNECTION SERVICE</span>
-                            <span className="text-xs text-slate-450 text-slate-400 block font-light">Status: Offline / Simulation Mode</span>
-                          </div>
-                        </div>
-                      )}
-                    </div>
+              {/* Chess Habit & Strategic Thinking Showcase */}
+              <section className="max-w-5xl mx-auto px-6 py-4">
+                <div className="bg-gradient-to-br from-slate-900 via-slate-850 to-amber-950 text-white rounded-3xl p-8 md:p-12 shadow-xl border border-slate-800 relative overflow-hidden">
+                  <div className="absolute -right-12 -top-12 opacity-10 text-9xl select-none pointer-events-none">
+                    ♟
                   </div>
 
-                  {/* Body interactive area */}
-                  <div className="pt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <div className="lg:col-span-7 space-y-4 font-light text-slate-350 text-xs leading-relaxed font-sans">
-                      <p>
-                        Our technology links inquiry forms directly with a primary Google Spreadsheet on your personal drive without any secondary database servers. All edits, updates, counselor comments, and dial states map natively.
-                      </p>
-                      
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                        <div className="bg-slate-950/40 border border-slate-850/65 p-3 rounded-xl space-y-1">
-                          <h4 className="font-bold text-[11px] text-white font-mono uppercase">🟢 Real-time Append</h4>
-                          <p className="text-[10.5px] text-slate-400 font-sans">Newly captured web leads post straight to the top row instantly.</p>
-                        </div>
-                        <div className="bg-slate-950/40 border border-slate-850/65 p-3 rounded-xl space-y-1">
-                          <h4 className="font-bold text-[11px] text-white font-mono uppercase">💬 Direct Dialing</h4>
-                          <p className="text-[10.5px] text-slate-400 font-sans">Personalized WhatsApp greetings generated with pre-filled templates in one-click.</p>
-                        </div>
-                      </div>
+                  <div className="max-w-3xl space-y-6 relative z-10">
+                    <div className="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-widest">
+                      <span>♟️</span> CHESS PLAYING HABIT & ANALYTICAL MINDSET
                     </div>
 
-                    <div className="lg:col-span-5 bg-slate-950/50 p-6 rounded-2xl border border-slate-850 text-center space-y-4 font-sans">
-                      {crmUser ? (
-                        <div className="space-y-4">
-                          <h3 className="font-bold text-sm text-white">Active Session Detected</h3>
-                          <p className="text-[11px] text-slate-400">You are successfully authenticated. Link your desired Google Spreadsheet and access the live lead pipeline.</p>
-                          
-                          <button
-                            onClick={navigateAndScrollToCrm}
-                            className="w-full bg-emerald-500 hover:bg-emerald-450 text-slate-950 font-mono font-bold text-xs py-3 rounded-xl uppercase transition-all shadow-md shadow-emerald-950/30 flex items-center justify-center gap-1.5 cursor-pointer border-none"
-                          >
-                            🚀 Open Lead Pipeline Dashboard
-                          </button>
-                        </div>
-                      ) : (
-                        <div className="space-y-4">
-                          <h3 className="font-bold text-sm text-white">Authorized Counselor Access</h3>
-                          <p className="text-[11px] text-slate-400">Authenticate natively with your Google credentials inside this application to unlock the live workspace.</p>
-                          
-                          <button
-                            onClick={navigateAndScrollToCrm}
-                            className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-bold text-xs py-3 rounded-xl uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none font-sans"
-                          >
-                            <LogIn className="w-3.5 h-3.5" />
-                            Go directly to Sign In Panel
-                          </button>
-
-                          <div className="text-[10px] text-slate-500 font-mono">
-                            *Embedded iFrames can sometimes prevent auth. Direct tabs are recommended if popup stays blank.
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Four Main Technology Capabilities Tracks Grid */}
-              <section className="max-w-5xl mx-auto px-6 space-y-10">
-                <div className="text-center space-y-2">
-                  <span className="text-xs font-mono text-cyan-600 uppercase tracking-widest block font-bold">
-                    EXPLORE WHAT IS POSSIBLE
-                  </span>
-                  <h2 className="text-3xl font-black text-slate-900 tracking-tight">
-                    Modern Capabilities Without Agency Retainers
-                  </h2>
-                  <p className="text-slate-500 font-light text-xs max-w-lg mx-auto">
-                    We've bundled the key technical components local companies need into highly optimized flat-rate packages. Select what fits your roadmap.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                  
-                  {/* Track 1: Web Tech */}
-                  <div className="bg-white border border-slate-100 hover:border-slate-200 rounded-2xl p-6 shadow-2xs flex flex-col justify-between space-y-4 transition-all group">
-                    <div className="space-y-3">
-                      <div className="h-10 w-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center">
-                        <Globe className="w-5 h-5" />
-                      </div>
-                      <h3 className="text-base font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors">
-                        High-Performance Web Engines
-                      </h3>
-                      <p className="text-xs text-slate-500 font-light leading-relaxed">
-                        Say goodbye to generic sluggish site builders. We mount customizable, compressed React engines with automated site backups so your boutique handles pages under 2 seconds.
-                      </p>
-                      <ul className="text-[10px] font-mono text-slate-400 space-y-1 pb-2">
-                        <li>• Standard 3-Page Showcases</li>
-                        <li>• High-speed Compression Codes</li>
-                        <li>• Complete DNS Administration Transfer</li>
-                      </ul>
-                    </div>
-                    <button 
-                      onClick={() => setActivePage("services")}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-slate-900 hover:text-amber-500 transition-colors uppercase self-start"
-                    >
-                      Browse Deliverables Track ➔
-                    </button>
-                  </div>
-
-                  {/* Track 2: Marketing & SEO */}
-                  <div className="bg-white border border-slate-100 hover:border-slate-200 rounded-2xl p-6 shadow-2xs flex flex-col justify-between space-y-4 transition-all group">
-                    <div className="space-y-3">
-                      <div className="h-10 w-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                        <TrendingUp className="w-5 h-5" />
-                      </div>
-                      <h3 className="text-base font-extrabold text-slate-900 group-hover:text-emerald-600 transition-colors">
-                        Localized Search Engine Index
-                      </h3>
-                      <p className="text-xs text-slate-500 font-light leading-relaxed">
-                        Ranks your retail store address higher inside target neighborhoods. We optimize your physical location markers on Google Maps so local consumers call directly for appointments or walks.
-                      </p>
-                      <ul className="text-[10px] font-mono text-slate-400 space-y-1 pb-2">
-                        <li>• Verified Coordinates Map pins</li>
-                        <li>• Direct Citations setup listings</li>
-                        <li>• Customer feedback loops structures</li>
-                      </ul>
-                    </div>
-                    <button 
-                      onClick={() => setActivePage("services")}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-slate-900 hover:text-emerald-500 transition-colors uppercase self-start"
-                    >
-                      Browse Deliverables Track ➔
-                    </button>
-                  </div>
-
-                  {/* Track 3: Custom Identity Design */}
-                  <div className="bg-white border border-slate-100 hover:border-slate-200 rounded-2xl p-6 shadow-2xs flex flex-col justify-between space-y-4 transition-all group">
-                    <div className="space-y-3">
-                      <div className="h-10 w-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center">
-                        <Palette className="w-5 h-5 opacity-80" />
-                      </div>
-                      <h3 className="text-base font-extrabold text-slate-900 group-hover:text-cyan-600 transition-colors">
-                        Cohesive Creative Branding
-                      </h3>
-                      <p className="text-xs text-slate-500 font-light leading-relaxed">
-                        Acquire stunning visual logo kits with consistent hex colors palettes and typography guides. We supply you with high-contrast customizable graphic documents ready to stamp onto shopfront panels or business cards.
-                      </p>
-                      <ul className="text-[10px] font-mono text-slate-400 space-y-1 pb-2">
-                        <li>• Custom Vector Logo Design</li>
-                        <li>• Print-Ready Stationery Assets</li>
-                        <li>• Digital Color Scheme Handbook</li>
-                      </ul>
-                    </div>
-                    <button 
-                      onClick={() => setActivePage("services")}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-slate-900 hover:text-cyan-500 transition-colors uppercase self-start"
-                    >
-                      Browse Deliverables Track ➔
-                    </button>
-                  </div>
-
-                  {/* Track 4: Task Automation */}
-                  <div className="bg-white border border-slate-100 hover:border-slate-200 rounded-2xl p-6 shadow-2xs flex flex-col justify-between space-y-4 transition-all group">
-                    <div className="space-y-3">
-                      <div className="h-10 w-10 rounded-xl bg-purple-50 text-purple-605 flex items-center justify-center">
-                        <Zap className="w-5 h-5 text-purple-600" />
-                      </div>
-                      <h3 className="text-base font-extrabold text-slate-900 group-hover:text-purple-600 transition-colors">
-                        Spreadsheets & Tasks Automation
-                      </h3>
-                      <p className="text-xs text-slate-500 font-light leading-relaxed">
-                        Connect input boxes directly to business phones or Gmail spreadsheets. Our simple data bridges transfer online customer requests and emails on weekends automatically with no manual copying tags.
-                      </p>
-                      <ul className="text-[10px] font-mono text-slate-400 space-y-1 pb-2">
-                        <li>• AI Automated FAQ Chat widgets</li>
-                        <li>• Contacts spreadsheet integrations</li>
-                        <li>• Outgoing auto-newsletter alerts</li>
-                      </ul>
-                    </div>
-                    <button 
-                      onClick={() => setActivePage("services")}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-slate-900 hover:text-purple-500 transition-colors uppercase self-start"
-                    >
-                      Browse Deliverables Track ➔
-                    </button>
-                  </div>
-
-                </div>
-              </section>
-
-              {/* Three-Step Process timeline Infographic Section */}
-              <section className="bg-slate-50 border-y border-slate-100 py-12">
-                <div className="max-w-5xl mx-auto px-6">
-                  
-                  <div className="text-center mb-10">
-                    <span className="text-xs font-mono text-amber-600 uppercase tracking-widest block font-bold mb-1">
-                      NO JARGON TIMELINES
-                    </span>
-                    <h2 className="text-2xl font-black text-slate-950 tracking-tight">
-                      We Build & Handover in 3 Simple Milestones
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-snug">
+                      Strategic Foresight Built on Daily Chess Discipline
                     </h2>
-                    <p className="text-slate-500 font-light text-xs max-w-md mx-auto mt-1.5">
-                      You retain full custody. We transfer root administrative credentials immediately upon completing our setup milestone.
-                    </p>
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center relative">
-                    
-                    {/* step 1 */}
-                    <div className="space-y-3">
-                      <div className="h-9 w-9 rounded-full bg-slate-900 text-white font-mono font-bold text-xs flex items-center justify-center mx-auto shadow-xs">
-                        1
+                    <p className="text-slate-300 text-sm md:text-base font-light leading-relaxed">
+                      Playing chess daily isn't just a habit—it's a core discipline that directly shapes my technical architecture, analytical problem solving, and business strategy. Every system design and analytical decision benefits from deep calculation, pattern recognition, and tactical execution.
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                      <div className="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 space-y-2">
+                        <div className="text-amber-400 font-mono text-xs font-bold uppercase flex items-center gap-2">
+                          <span>♔</span> Opening Strategy
+                        </div>
+                        <h3 className="text-white text-sm font-bold">Solid Foundation</h3>
+                        <p className="text-slate-400 text-xs font-light leading-relaxed">
+                          Establishing rock-solid web infrastructure, database schemas, and clean code principles right from move one.
+                        </p>
                       </div>
-                      <h4 className="text-xs font-bold text-slate-900">Check Your Deliverables</h4>
-                      <p className="text-[11px] text-slate-500 font-light leading-relaxed">
-                        Browse our transparent digital catalog and select layout sizes, local Google SEO setup modules, or custom visual logos that suit your goals.
-                      </p>
-                    </div>
 
-                    {/* step 2 */}
-                    <div className="space-y-3">
-                      <div className="h-9 w-9 rounded-full bg-cyan-600 text-white font-mono font-bold text-xs flex items-center justify-center mx-auto shadow-xs">
-                        2
+                      <div className="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 space-y-2">
+                        <div className="text-cyan-400 font-mono text-xs font-bold uppercase flex items-center gap-2">
+                          <span>♘</span> Tactical Vision
+                        </div>
+                        <h3 className="text-white text-sm font-bold">Pattern Recognition</h3>
+                        <p className="text-slate-400 text-xs font-light leading-relaxed">
+                          Identifying bottlenecks, calculating multiple steps ahead, and optimizing workflows for peak conversion.
+                        </p>
                       </div>
-                      <h4 className="text-xs font-bold text-slate-900">Custom SOW Blueprint</h4>
-                      <p className="text-[11px] text-slate-500 font-light leading-relaxed">
-                        We compile customized blueprint parameters based on your selected service tracks and provide clean, plain-jargon agreements.
-                      </p>
-                    </div>
 
-                    {/* step 3 */}
-                    <div className="space-y-3">
-                      <div className="h-9 w-9 rounded-full bg-emerald-600 text-white font-mono font-bold text-xs flex items-center justify-center mx-auto shadow-xs">
-                        3
+                      <div className="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 space-y-2">
+                        <div className="text-emerald-400 font-mono text-xs font-bold uppercase flex items-center gap-2">
+                          <span>♖</span> Endgame Precision
+                        </div>
+                        <h3 className="text-white text-sm font-bold">Flawless Execution</h3>
+                        <p className="text-slate-400 text-xs font-light leading-relaxed">
+                          Delivering clean, high-performance web systems and verified SOW documentation with zero blunders.
+                        </p>
                       </div>
-                      <h4 className="text-xs font-bold text-slate-900">Transfer & Deployment</h4>
-                      <p className="text-[11px] text-slate-500 font-light leading-relaxed">
-                        We build, test, and host your resources, then configure administrative domain ownerships directly to your name—putting you in complete control.
-                      </p>
                     </div>
-
-                  </div>
-
-                </div>
-              </section>
-
-              {/* Showcase Gallery of Real Local Business Makeovers */}
-              <section className="max-w-5xl mx-auto px-6 space-y-10">
-                <div className="text-center space-y-2">
-                  <span className="text-xs font-mono text-emerald-600 uppercase tracking-widest block font-bold">
-                    CELEBRATING DIGITAL TRANSFORMATION SUCCESSES
-                  </span>
-                  <h2 className="text-2xl font-black text-slate-900 tracking-tight">
-                    Real Local Businesses. Verified Transitions.
-                  </h2>
-                  <p className="text-slate-500 font-light text-xs max-w-md mx-auto">
-                    See how community trade shops and independent clinics modernized their digital setup smoothly using standard Factlive Tech pillars.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-                  
-                  {/* Gallery item 1 */}
-                  <div className="bg-white border border-slate-100 rounded-2xl p-5 space-y-4 shadow-3xs hover:shadow-2xs transition-all">
-                    <div className="text-xs font-mono font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg self-start inline-block">
-                      BAKERY & RETAIL
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-slate-900">Milano Italian Bakers</h4>
-                      <p className="text-[10px] text-slate-400 font-mono mt-0.5 animate-pulse">EST. SEO & WEBSITE MAKE-OVER</p>
-                    </div>
-                    <p className="text-[11px] text-slate-500 font-light leading-relaxed">
-                      "We had no online menu layout. Factlive set up a stunning mobile showcase, integrated map reviews, and listed our catering forms. Our weekend bakery pre-orders grew by 45% in 3 weeks!"
-                    </p>
-                    <div className="border-t border-slate-50 pt-3 flex items-center gap-1.5 text-[10px] font-medium text-emerald-600">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> Web Showcase + Google SEO
-                    </div>
-                  </div>
-
-                  {/* Gallery item 2 */}
-                  <div className="bg-white border border-slate-100 rounded-2xl p-5 space-y-4 shadow-3xs hover:shadow-2xs transition-all">
-                    <div className="text-xs font-mono font-bold text-cyan-600 bg-cyan-50 px-2.5 py-1 rounded-lg self-start inline-block">
-                      CLINICAL CARE
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-slate-900">Dr. Sarah's Wellness Hub</h4>
-                      <p className="text-[10px] text-slate-400 font-mono mt-0.5">EST. CLIENT INTAKE AUTOMATION</p>
-                    </div>
-                    <p className="text-[11px] text-slate-500 font-light leading-relaxed">
-                      "We were copying patient address data by hand from inbox emails to clinic spreadsheets. The automatic spreadsheet sync tool stores client forms instantly! It saved us 6 hours of work every week."
-                    </p>
-                    <div className="border-t border-slate-50 pt-3 flex items-center gap-1.5 text-[10px] font-medium text-emerald-600">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> Database & Tasks Sync Setup
-                    </div>
-                  </div>
-
-                  {/* Gallery item 3 */}
-                  <div className="bg-white border border-slate-100 rounded-2xl p-5 space-y-4 shadow-3xs hover:shadow-2xs transition-all">
-                    <div className="text-xs font-mono font-bold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-lg self-start inline-block">
-                      GARDEN MERCHANTS
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-bold text-slate-900">Green Horizon Nursery</h4>
-                      <p className="text-[10px] text-slate-400 font-mono mt-0.5">EST. VERIFIED GOOGLE MAP PIN</p>
-                    </div>
-                    <p className="text-[11px] text-slate-500 font-light leading-relaxed">
-                      "With zero neighborhood lookup prominence, we were losing walk-ins. Factlive structured our Google Maps pin setup. We recorded 1,250 verified local user profile views in month one alone!"
-                    </p>
-                    <div className="border-t border-slate-50 pt-3 flex items-center gap-1.5 text-[10px] font-medium text-emerald-600">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> Google Map Profiling Listed
-                    </div>
-                  </div>
-
-                </div>
-              </section>
-
-              {/* Dynamic Bottom Anchor CTA */}
-              <section className="max-w-5xl mx-auto px-6 pt-4">
-                <div className="bg-slate-950 text-white rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden border border-slate-800">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-amber-400/[0.04] rounded-full blur-2xl pointer-events-none" />
-                  
-                  <div className="space-y-1.5 text-center md:text-left">
-                    <p className="text-xs font-mono text-amber-400 font-bold tracking-wider uppercase">
-                      READY TO CUSTOM-BUILD?
-                    </p>
-                    <h3 className="text-lg md:text-xl font-extrabold text-white tracking-tight">
-                      Explore our transparent flat-rate services
-                    </h3>
-                    <p className="text-[11px] text-slate-400 max-w-md font-light">
-                      Browse customized website modules, search map listings, chatbot automations, and request your custom proposal instantly.
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-3.5 w-full md:w-auto shrink-0 justify-center">
-                    <button
-                      onClick={() => setActivePage("services")}
-                      className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-black text-xs px-6 py-4 rounded-xl transition-all uppercase text-center flex items-center justify-center gap-2"
-                    >
-                      Browse Digital Services
-                      <ArrowRight className="w-4 h-4 shadow-sm" strokeWidth={3} />
-                    </button>
                   </div>
                 </div>
               </section>
@@ -1258,7 +983,7 @@ export default function App() {
                     onClick={() => setActivePage("about")}
                     className="border border-slate-200 hover:bg-slate-50 text-slate-600 font-medium px-6 py-3 rounded-xl transition-all"
                   >
-                    How Factlive Works ➔
+                    How We Work ➔
                   </button>
                 </div>
               </section>
@@ -1519,7 +1244,7 @@ export default function App() {
                           <ShieldCheck className="w-8 h-8 text-amber-400 mx-auto animate-pulse" />
                           <h5 className="text-[11px] font-mono uppercase font-bold text-amber-400">Proposal Wishlist Sent!</h5>
                           <p className="text-[10px] text-slate-300 max-w-xs mx-auto leading-relaxed">
-                            Perfect <strong className="text-white">{name || "Valued Customer"}</strong>! We have registered your custom pricing configurations for {company || "Factlive Plan"}. Our support squad will email you at <strong className="text-white">{email}</strong> to launch!
+                            Perfect <strong className="text-white">{name || "Valued Customer"}</strong>! We have registered your custom pricing configurations for {company || "Your Plan"}. Our support squad will email you at <strong className="text-white">{email}</strong> to launch!
                           </p>
                         </motion.div>
                       )}
@@ -1547,7 +1272,7 @@ export default function App() {
                   PAGE 3: KNOWLEDGE & INSIGHTS
                 </span>
                 <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-                  Factlive Tech Learning Hub
+                  Anand Analyst Learning Hub
                 </h2>
                 <p className="text-slate-500 font-light text-sm mt-1.5 leading-relaxed">
                   Understand domain infrastructure, local search optimization, conversion tactics, and email workflows in clear plain-jargon guides.
@@ -1988,11 +1713,11 @@ export default function App() {
                       </p>
                       <p className="flex items-center gap-2">
                         <span className="text-amber-400">⚡</span>
-                        <span>Counselor Mail: <a href="mailto:factlive.in@gmail.com" className="text-white hover:underline font-mono">factlive.in@gmail.com</a></span>
+                        <span>Counselor Mail: <a href="mailto:anandanalyst.in@gmail.com" className="text-white hover:underline font-mono">anandanalyst.in@gmail.com</a></span>
                       </p>
                       <p className="flex items-center gap-2">
                         <span className="text-amber-400">⚡</span>
-                        <span>Official Portal: <a href="http://www.factlive.in/admission" target="_blank" rel="noopener noreferrer" className="text-white hover:underline break-all font-mono">www.factlive.in/admission</a></span>
+                        <span>Official Portal: <a href="http://www.anandanalyst.in/admission" target="_blank" rel="noopener noreferrer" className="text-white hover:underline break-all font-mono">www.anandanalyst.in/admission</a></span>
                       </p>
                     </div>
 
@@ -2200,7 +1925,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* PAGE VIEW 3: ABOUT US & FAQS ACCORDION */}
+          {/* PAGE VIEW 3: ABOUT US, RESUME & FAQS ACCORDION */}
           {activePage === "about" && (
             <motion.div
               key="about-page"
@@ -2208,45 +1933,48 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="max-w-6xl mx-auto px-6 py-12 space-y-12"
+              className="space-y-12"
             >
-              
-              <div className="text-center max-w-xl mx-auto">
-                <span className="text-xs font-mono text-amber-600 uppercase tracking-widest block font-bold mb-1">
-                  PAGE 3: OUR CORE MANIFESTO
-                </span>
-                <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-                  About Factlive Tech & FAQs
-                </h2>
-                <p className="text-slate-500 font-light text-sm mt-1.5">
-                  Helping independent trade owners and specialists build credible digital presence with clean, affordable structures.
-                </p>
-              </div>
+              {/* Professional Profile & Resume Component */}
+              <ProfessionalProfile />
 
-              {/* Two Panel Columns - Split Info & FAQs */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                
-                {/* Manifesto Description Left (5 cols) */}
-                <div className="lg:col-span-5 space-y-5 bg-slate-50 border border-slate-100 p-6 rounded-2xl">
-                  <h4 className="text-xs font-mono text-cyan-600 uppercase tracking-widest font-bold">WHO WE HELP EACH DAY</h4>
-                  <p className="text-xs text-slate-600 font-light leading-relaxed">
-                    Factlive Tech brings micro-startups, single retail shops, and professional service specialists into the modern web domain without high corporate retainer contracts.
+              <div className="max-w-6xl mx-auto px-6 py-4 border-t border-slate-200">
+                <div className="text-center max-w-xl mx-auto mb-8">
+                  <span className="text-xs font-mono text-amber-600 uppercase tracking-widest block font-bold mb-1">
+                    OUR CORE MANIFESTO &amp; FAQS
+                  </span>
+                  <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                    Frequently Asked Questions
+                  </h2>
+                  <p className="text-slate-500 font-light text-xs mt-1">
+                    Straightforward answers regarding our services, domain ownership, and technical operations.
                   </p>
-                  <p className="text-xs text-slate-600 font-light leading-relaxed">
-                    We combine high-speed websites, Google Maps search configurations, and pretty digital vector style colors. No jargon. No complex lock-in contracts.
-                  </p>
-
-                  <div className="pt-4 border-t border-slate-200 text-[11px] font-mono text-slate-500 space-y-2">
-                    <p className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 bg-amber-500 rounded-full" />
-                      <span>Headquarters: Commercial Tech Hub Hub</span>
-                    </p>
-                    <p className="flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 bg-amber-500 rounded-full" />
-                      <span>Contact Support: hello@factlivetech.com</span>
-                    </p>
-                  </div>
                 </div>
+
+                {/* Two Panel Columns - Split Info & FAQs */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                  
+                  {/* Manifesto Description Left (5 cols) */}
+                  <div className="lg:col-span-5 space-y-4 bg-slate-50 border border-slate-200/80 p-6 rounded-2xl">
+                    <h4 className="text-xs font-mono text-cyan-600 uppercase tracking-widest font-bold">FOUNDER COMMITMENT</h4>
+                    <p className="text-xs text-slate-600 font-light leading-relaxed">
+                      Anand K Gupta brings micro-startups, single retail shops, and professional service specialists into the modern web domain without high corporate retainer contracts.
+                    </p>
+                    <p className="text-xs text-slate-600 font-light leading-relaxed">
+                      We combine high-speed websites, Google Maps search configurations, and pretty digital vector style colors. No jargon. No complex lock-in contracts.
+                    </p>
+
+                    <div className="pt-4 border-t border-slate-200 text-[11px] font-mono text-slate-500 space-y-2">
+                      <p className="flex items-center gap-2">
+                        <span className="h-1.5 w-1.5 bg-amber-500 rounded-full" />
+                        <span>Headquarters: Sector 73, Noida, UP 201307</span>
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <span className="h-1.5 w-1.5 bg-emerald-500 rounded-full" />
+                        <span>Contact Support: anand.analysts@gmail.com</span>
+                      </p>
+                    </div>
+                  </div>
 
                 {/* FAQ Accordion Right (7 cols) */}
                 <div className="lg:col-span-7 space-y-4">
@@ -2307,9 +2035,10 @@ export default function App() {
                 </div>
 
               </div>
+            </div>
 
-            </motion.div>
-          )}
+          </motion.div>
+        )}
 
         </AnimatePresence>
       </main>
@@ -2318,8 +2047,8 @@ export default function App() {
       <footer className="bg-slate-950 text-slate-400 text-xs py-12 border-t border-slate-900 mt-12">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-6">
           <div className="flex items-center justify-center gap-2">
-            <div className="h-4 w-4 bg-white rounded-full flex items-center justify-center text-[10px] text-slate-900 font-extrabold">F</div>
-            <span className="font-display font-black text-white text-sm tracking-tight">Factlive Tech Digital</span>
+            <div className="h-4 w-4 bg-white rounded-full flex items-center justify-center text-[10px] text-slate-900 font-extrabold">A</div>
+            <span className="font-display font-black text-white text-sm tracking-tight">Anand Analyst</span>
           </div>
 
           <p className="max-w-md mx-auto text-slate-500 font-light leading-relaxed text-[11px]">
@@ -2327,7 +2056,7 @@ export default function App() {
           </p>
 
           <div className="flex gap-4 items-center justify-center font-mono text-[9px] uppercase tracking-wider text-slate-600 border-t border-slate-900 pt-6">
-            <span>© {new Date().getFullYear()} Factlive Tech. All Rights Reserved.</span>
+            <span>© {new Date().getFullYear()} Anand Analyst. All Rights Reserved.</span>
             <span>|</span>
             <span className="flex items-center gap-1"><Heart className="w-2.5 h-2.5 fill-red-500 text-red-500" /> Made Simple for Local Businesses</span>
           </div>
